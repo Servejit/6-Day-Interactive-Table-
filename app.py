@@ -51,7 +51,7 @@ def analyze_stock_data(raw_text, total_days=6, main4_days=4):
                 extra_mode = True
                 continue
 
-            match = re.match(r'^([A-Z0-9]+),', line)
+            match = re.match(r'^([A-Z0-9&]+),', line)
 
             if match:
 
@@ -103,11 +103,12 @@ def analyze_stock_data(raw_text, total_days=6, main4_days=4):
 
 
 # ============================================
-# Input Box
+# Text Area (CORRECTED)
 # ============================================
 
-raw_data = st.text_area(
-    "https://colab.research.google.com/drive/1eiD96FMKbxOcqnY55PcA6yYJY5LbLzlV
+default_data = """💹I'day 
+
+https://colab.research.google.com/drive/1eiD96FMKbxOcqnY55PcA6yYJY5LbLzlV
 
 
 https://colab.research.google.com/drive/1Ftd318NU5cQvBy28-u16_G3daf5JWYug
@@ -303,8 +304,21 @@ UPL, "719.15" + "717.35"
 
 
 ############################
-       ______  Finish Line ______",
-    height=300
+       ______  Finish Line _______
+
+
+
+
+"""
+
+raw_data = st.text_area(
+
+    label="📥 Paste Raw Data Here",
+
+    value=default_data,
+
+    height=400
+
 )
 
 
@@ -316,6 +330,7 @@ if st.button("Analyze"):
 
     if raw_data.strip() == "":
         st.warning("Please paste data first")
+
     else:
 
         df = analyze_stock_data(raw_data)
@@ -326,13 +341,19 @@ if st.button("Analyze"):
 
 
         # Excel Download
+
         output = BytesIO()
 
-        df.to_excel(output, index=False)
+        df.to_excel(output, index=False, engine="xlsxwriter")
 
         st.download_button(
+
             label="📥 Download Excel",
+
             data=output.getvalue(),
+
             file_name="6thSense_Output.xlsx",
+
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+
         )
