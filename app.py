@@ -107,9 +107,7 @@ def analyze_stock_data(raw_text, total_days=6, main4_days=4):
 # ============================================
 
 raw_data = st.text_area(
-    "💹I'day 
-
-https://colab.research.google.com/drive/1eiD96FMKbxOcqnY55PcA6yYJY5LbLzlV
+    "https://colab.research.google.com/drive/1eiD96FMKbxOcqnY55PcA6yYJY5LbLzlV
 
 
 https://colab.research.google.com/drive/1Ftd318NU5cQvBy28-u16_G3daf5JWYug
